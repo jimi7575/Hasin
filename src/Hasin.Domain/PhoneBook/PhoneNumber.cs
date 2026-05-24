@@ -5,6 +5,8 @@ namespace Hasin.Domain.PhoneBook;
 
 public sealed partial record PhoneNumber
 {
+    public const string Pattern = @"^\+?[0-9][0-9\s\-()]*$";
+
     private PhoneNumber(string value)
     {
         Value = value;
@@ -29,6 +31,6 @@ public sealed partial record PhoneNumber
         return new PhoneNumber(value);
     }
 
-    [GeneratedRegex(@"^\+?[0-9][0-9\s\-()]*$")]
+    [GeneratedRegex(Pattern)]
     private static partial Regex PhoneNumberRegex();
 }

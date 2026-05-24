@@ -7,7 +7,7 @@ This project implements an in-memory phone book with RESTful APIs, Swagger, Medi
 ## Architecture
 
 - `Hasin.Domain` contains the core model: `Contact`, `PersonName`, `PhoneNumber`, and `ContactTag`. `Contact` is the aggregate root for one phone book row, while name, phone number, and tag are value objects. Validation rules live here because they are business invariants, not API concerns.
-- `Hasin.Application` contains use cases, DTOs, service contracts, the `ContactService`, FluentValidation validators, and MediatR commands/queries. Controllers only send requests to the mediator and do not contain business logic.
+- `Hasin.Application` contains feature-based use cases, DTOs, service contracts, the `ContactService`, FluentValidation validators, and MediatR commands/queries. Controllers only send requests to the mediator and do not contain business logic.
 - `Hasin.Infrastructure` contains the in-memory repository implementation. It is registered as a singleton so data remains available while the application process is running.
 - `Hasin.Api` exposes REST endpoints and Swagger. It also has centralized exception handling to map domain validation errors to `400`, missing rows to `404`, and successful deletes to `204`.
 - `Hasin.Tests` covers domain behavior and application use cases.

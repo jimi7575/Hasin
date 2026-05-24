@@ -1,6 +1,7 @@
 using FluentValidation;
 using Hasin.Application;
 using Hasin.Application.PhoneBook.Contacts.CreateContact;
+using Hasin.Application.PhoneBook.Contacts.DeleteContact;
 using Hasin.Infrastructure;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +30,16 @@ public sealed class ValidationTests
             CancellationToken.None);
 
         Assert.NotEqual(Guid.Empty, contact.Id);
+    }
+
+    [Fact]
+    public async Task Mediator_rejects_empty_delete_id_before_handler()
+    {
+        var sender = CreateSender();
+
+        await Assert.ThrowsAsync<ValidationException>(() => sender.Send(
+            new DeleteContactCommand(Guid.Empty),
+            CancellationToken.None));
     }
 
     private static ISender CreateSender()
