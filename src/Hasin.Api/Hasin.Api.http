@@ -1,0 +1,6 @@
+@Hasin.Api_HostAddress = http://localhost:5269
+
+GET {{Hasin.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
